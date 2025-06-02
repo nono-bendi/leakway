@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeakWay - Protégez votre identité</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+</head>
+<body class="landingpage">
+  <header class="navbar">
+    <h1 class="navlogo">LeakWay</h1>
+    <nav class="navlinkwrap">
+      <a class="navlink selectedlink" href="#">Accueil</a>
+      <a class="navlink" href="form.html">Signaler un lien</a>
+      <a class="navlink" href="admin.html">Espace Admin</a>
+    </nav>
+  </header>
+
+  <section class="box">
+    <div class="infobox">
+      <h2 class="infobox-boldtext">Une plateforme pour signaler les abus en ligne</h2>
+      <p class="infobox-slimtext">Votre voix compte. Anonyme, rapide et sécurisée.</p>
+      <div class="infobox-btnwrapper">
+        <a href="form.html" class="infobox-explorebtn selected">Signaler un contenu</a>
+      </div>
+    </div>
+    <div class="display">
+      <div id="lottie-shield" class="display-nft"></div>
+    </div>
+  </section>
+
+  
+
+  <section class="started">
+    <h2 class="started-boldtext">Fonctionnalités</h2>
+    <div class="started-items">
+      <div class="itemwrapper">
+        <div class="started-items-item">🔒</div>
+        <p>Anonymat total</p>
+      </div>
+      <div class="itemwrapper">
+        <div class="started-items-item">⚡</div>
+        <p>Signalement rapide</p>
+      </div>
+      <div class="itemwrapper">
+        <div class="started-items-item">🛡️</div>
+        <p>Données sécurisées</p>
+      </div>
+      <div class="itemwrapper">
+        <div class="started-items-item">🕵️</div>
+        <p>Traitement confidentiel</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="discover">
+    <div class="discover-title">
+      <p>Comment ça marche ?</p>
+    </div>
+    <div class="discover-items">
+      <div class="item">
+        <div class="item-img">1️⃣</div>
+        <p class="item-title">Renseignez le signalement</p>
+        <p class="item-date">Via le formulaire simple</p>
+      </div>
+      <div class="item">
+        <div class="item-img">2️⃣</div>
+        <p class="item-title">Traitement des données</p>
+        <p class="item-date">Par l'admin de façon confidentielle</p>
+      </div>
+      <div class="item">
+        <div class="item-img">3️⃣</div>
+        <p class="item-title">Action</p>
+        <p class="item-date">Signalement transmis si besoin</p>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="footer2">
+    <p>© LeakWay 2025. Tous droits réservés.</p>
+  </div>
+  <script>
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-shield'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'shield-animation.json'
+  });
+</script>
+</body>
+</html>

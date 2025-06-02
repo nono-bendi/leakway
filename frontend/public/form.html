@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signaler un contenu leaké</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Signaler un contenu leaké</h1>
+    <form id="leakForm">
+      <label>Nom :</label>
+      <input type="text" name="nom" required />
+
+      <label>Email :</label>
+      <input type="email" name="email" required />
+
+      <label>Lien du contenu leaké :</label>
+      <input type="url" name="lien" required />
+
+      <label>Plateforme :</label>
+      <select name="plateforme" required>
+        <option value="">-- Choisir --</option>
+        <option value="Coomer">Coomer</option>
+        <option value="Kemono">Kemono</option>
+        <option value="Autre">Autre</option>
+      </select>
+
+      <label>Commentaire (optionnel) :</label>
+      <textarea name="commentaire" rows="4"></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+    <p id="message"></p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
