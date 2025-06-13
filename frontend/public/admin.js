@@ -1,10 +1,12 @@
+// Récupère le token JWT du localStorage
 let token = localStorage.getItem('token');
 
+// Fonction de connexion admin
 function login() {
   const username = document.getElementById('admin-username').value;
   const password = document.getElementById('admin-password').value;
 
-  fetch('/api/reports/login', {
+  fetch('https://leakway.onrender.com/api/reports/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
@@ -26,13 +28,15 @@ function login() {
     });
 }
 
+// Déconnexion admin
 function logout() {
   localStorage.removeItem('token');
   location.reload();
 }
 
+// Charge les signalements pour l'admin
 function chargerSignalements() {
-  fetch("/api/reports", {
+  fetch("https://leakway.onrender.com/api/reports", {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -45,24 +49,24 @@ function chargerSignalements() {
       data.forEach((report) => {
         const tr = document.createElement("tr");
 
-tr.innerHTML = `
+        tr.innerHTML = `
   <td data-label="Nom">${report.nom}</td>
   <td data-label="Email">${report.email}</td>
   <td data-label="Lien">${report.lien}</td>
   <td data-label="Plateforme">${report.plateforme}</td>
   <td data-label="Commentaire">${report.commentaire || ""}</td>
-  <td data-label="Actions"><button class="delete-btn" onclick="deleteReport(${report.id})">🗑️</button></td>
-`;
-
+  <td data-label="Actions"><button class="delete-btn" data-id="${report.id}">🗑️</button></td>
+        `;
 
         tableBody.appendChild(tr);
       });
 
+      // Ajoute l'événement de suppression sur chaque bouton
       document.querySelectorAll(".delete-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
           const id = btn.getAttribute("data-id");
 
-          fetch(`/api/reports/${id}`, {
+          fetch(`https://leakway.onrender.com/api/reports/${id}`, {
             method: "DELETE",
             headers: {
               'Authorization': `Bearer ${token}`
@@ -81,6 +85,7 @@ tr.innerHTML = `
     });
 }
 
+// Affiche le bon écran selon la présence du token
 document.addEventListener("DOMContentLoaded", () => {
   token = localStorage.getItem('token');
 

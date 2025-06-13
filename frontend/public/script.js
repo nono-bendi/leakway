@@ -6,12 +6,8 @@ form.addEventListener('submit', async function (e) {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData);
 
-  // Si tu veux forcer la redirection même sans backend, décommente la ligne suivante :
-  // window.location.href = 'confirmation.html';
-
-  // Sinon, essaie d'envoyer au backend (fonctionnera si tu es sur Node.js)
   try {
-    const response = await fetch('/api/reports', {
+    const response = await fetch('https://leakway.onrender.com/api/reports', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -23,10 +19,33 @@ form.addEventListener('submit', async function (e) {
       document.getElementById('message').textContent = "Erreur lors de l'envoi.";
     }
   } catch (error) {
-    // Si tu es sur Live Server, on redirige quand même
     window.location.href = 'confirmation.html';
-    // Si tu veux afficher une erreur à la place, commente la ligne au-dessus et décommente celle-ci :
-    // document.getElementById('message').textContent = "Erreur : impossible d’envoyer le signalement.";
-    // console.error(error);
+  }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Lottie
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-shield'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'shield-animation.json'
+  });
+
+  // Bulles
+  const bubblesContainer = document.querySelector('.bubbles');
+  if (bubblesContainer) {
+    for (let i = 0; i < 40; i++) {
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.style.setProperty('--size', `${2 + Math.random() * 4}rem`);
+      bubble.style.setProperty('--distance', `${6 + Math.random() * 4}rem`);
+      bubble.style.setProperty('--position', `${-5 + Math.random() * 110}%`);
+      bubble.style.setProperty('--time', `${2 + Math.random() * 2}s`);
+      bubble.style.setProperty('--delay', `${-1 * (2 + Math.random() * 2)}s`);
+      bubblesContainer.appendChild(bubble);
+    }
   }
 });

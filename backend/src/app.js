@@ -1,30 +1,31 @@
+// Application Express principale
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const reportRoutes = require('./routes/reportRoutes'); // ✅ Nom corrigé ici
+const reportRoutes = require('./routes/reportRoutes'); // Routes pour les signalements
 const db = require('./db');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Sert les fichiers statiques (HTML/CSS/JS du frontend)
+// Sert les fichiers statiques du frontend
 app.use(express.static(path.join(__dirname, '../../frontend/public')));
 
-// Middleware CORS
+// Middleware CORS pour autoriser les requêtes cross-origin
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'DELETE'], // Ajout de DELETE pour l'admin
-  allowedHeaders: ['Content-Type', 'Authorization'] // Autorise le token
+  methods: ['GET', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Middleware JSON et URL-encoded
+// Middleware pour parser le JSON et les formulaires
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Utilise les routes de report
-app.use('/api/reports', reportRoutes); // ✅ Correction ici (plus "routes")
+app.use('/api/reports', reportRoutes);
 
 // Lancement du serveur
 app.listen(PORT, () => {

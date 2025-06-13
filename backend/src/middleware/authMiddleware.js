@@ -1,4 +1,5 @@
 // middleware/authMiddleware.js
+// Middleware d'authentification JWT pour protéger les routes admin
 const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
