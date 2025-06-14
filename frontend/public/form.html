@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report Leaked Content</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Report leaked content anonymously with LeakWay." />
+</head>
+<body>
+  <div class="container">
+    <h1>Report Leaked Content</h1>
+    <form id="leakForm">
+      <label>Name:</label>
+      <input type="text" name="nom" required />
+
+      <label>Account name:</label>
+      <input type="text" name="compte" required />
+
+      <label>Email:</label>
+      <input type="email" name="email" required />
+
+      <label>Leaked content URL:</label>
+      <input type="url" name="lien_pirate" required />
+
+      <label>Official content URL:</label>
+      <input type="url" name="lien_officiel" required />
+
+      <label>Platform:</label>
+      <select name="plateforme" required>
+        <option value="">-- Select --</option>
+        <option value="Coomer">Coomer</option>
+        <option value="Kemono">Kemono</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label>Comment (optional):</label>
+      <textarea name="commentaire" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <p id="message" style="color:red; margin-top: 10px;"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById('leakForm');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('https://leakway.onrender.com/api/reports', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          window.location.href = 'confirmation.html';
+        } else {
+          document.getElementById('message').textContent = "Submission failed. Check your inputs.";
+        }
+      } catch (error) {
+        document.getElementById('message').textContent = "Network error.";
+      }
+    });
+  </script>
+</body>
+</html>

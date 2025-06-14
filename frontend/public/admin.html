@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portail Admin - Leakway</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-section">
+    <h2>Connexion administrateur</h2>
+    <input type="text" id="admin-username" placeholder="Nom d'utilisateur">
+    <input type="password" id="admin-password" placeholder="Mot de passe">
+    <button onclick="login()">Se connecter</button>
+    <p id="login-error" style="color: red;"></p>
+  </div>
+
+  <div id="dashboard" class="hidden">
+    <h2>Signalements reçus</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Lien</th>
+          <th>Plateforme</th>
+          <th>Commentaire</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+     <tbody id="report-table-body">
+  <!-- Les lignes seront générées dynamiquement par admin.js -->
+</tbody>
+
+    </table>
+  </div>
+  <button onclick="logout()">Déconnexion</button>
+
+
+  <script src="admin.js"></script>
+</body>
+</html>
+
