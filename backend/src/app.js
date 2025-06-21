@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../../frontend/public')));
 
 // Middleware CORS pour autoriser les requêtes cross-origin
 app.use(cors({
-  origin: 'https://shiny-kulfi-a0f3fb.netlify.app',
+  origin: 'https://comfy-treacle-b10746.netlify.app',
   methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
