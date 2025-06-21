@@ -14,11 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, '../../frontend/public')));
 
 // Middleware CORS pour autoriser les requêtes cross-origin
-app.use(cors({
-  origin: 'https://comfy-treacle-b10746.netlify.app',
-  methods: ['GET', 'POST', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+origin: '*', // temporairement pour tous les domaines
 
 
 // Middleware pour parser le JSON et les formulaires
