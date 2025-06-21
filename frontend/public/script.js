@@ -7,7 +7,8 @@ form.addEventListener('submit', async function (e) {
   const data = Object.fromEntries(formData.entries());
 
   try {
-    const response = await fetch('https://leakway-1.onrender.com/api/reports', {
+    const response = await fetch('https://leakway-production.up.railway.app/api/reports', {
+
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
