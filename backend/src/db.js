@@ -1,44 +1,31 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+const { Pool } = require('pg');
+require('dotenv').config();
 
-// Chemin vers le fichier leakway.db
-const dbPath = path.resolve(__dirname, '../../database/leakway.db');
-const db = new sqlite3.Database(dbPath);
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // Nécessaire sur Railway
+});
 
-function enregistrerSignalement(data) {
-  return new Promise((resolve, reject) => {
-    const { nom, email, lien, plateforme, commentaire, lienOfficiel, nomCompte } = data;
-    const query = `
-      INSERT INTO reports (nom, email, lien, plateforme, commentaire, lienOfficiel, nomCompte)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `;
-    db.run(query, [nom, email, lien, plateforme, commentaire, lienOfficiel, nomCompte], function (err) {
-      if (err) reject(err);
-      else resolve({ id: this.lastID });
-    });
-  });
+async function enregistrerSignalement(data) {
+  const { nom, email, lien, plateforme, commentaire, lienOfficiel, nomCompte } = data;
+  const query = `
+    INSERT INTO reports (nom, email, lien, plateforme, commentaire, lienOfficiel, nomCompte)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING id
+  `;
+  const values = [nom, email, lien, plateforme, commentaire, lienOfficiel, nomCompte];
+  const result = await pool.query(query, values);
+  return result.rows[0];
 }
 
-
-function getAllReports() {
-  return new Promise((resolve, reject) => {
-    db.all('SELECT * FROM reports ORDER BY rowid DESC', [], (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
-    });
-  });
+async function getAllReports() {
+  const result = await pool.query('SELECT * FROM reports ORDER BY id DESC');
+  return result.rows;
 }
 
-
-function supprimerReport(id) {
-  return new Promise((resolve, reject) => {
-    db.run(`DELETE FROM reports WHERE id = ?`, [id], function (err) {
-      if (err) reject(err);
-      else resolve();
-    });
-  });
+async function supprimerReport(id) {
+  await pool.query('DELETE FROM reports WHERE id = $1', [id]);
 }
-
 
 module.exports = {
   enregistrerSignalement,
