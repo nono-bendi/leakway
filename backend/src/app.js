@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../../frontend/public')));
 
 // Middleware CORS pour autoriser les requêtes cross-origin
 app.use(cors({
-  origin: 'https://leakway-1.onrender.com',
+  origin: 'https://shiny-kulfi-a0f3fb.netlify.app',
   methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
