@@ -28,37 +28,29 @@ router.get('/', verifyToken, async (req, res) => {
 
 // POST report (public)
 router.post('/', async (req, res) => {
-  const {
-    nom,
-    nomCompte,
-    email,
-    lienPirate,
-    lienOfficiel,
-    plateforme,
-    commentaire,
-  } = req.body;
+  const { nom, compte, email, lien_pirate, lien_officiel, plateforme, commentaire } = req.body;
 
-  // validation rapide
-  if (![nom, nomCompte, email, lienPirate, lienOfficiel, plateforme].every(Boolean)) {
+  // Vérification
+  if (!nom || !compte || !email || !lien_pirate || !lien_officiel || !plateforme) {
     return res.status(400).json({ error: 'Champs obligatoires manquants' });
   }
 
   try {
-    const { id } = await db.enregistrerSignalement({
+    const result = await db.enregistrerSignalement({
       nom,
-      nomCompte,
+      compte,
       email,
-      lienPirate,
-      lienOfficiel,
+      lien_pirate,
+      lien_officiel,
       plateforme,
       commentaire,
     });
-    res.status(201).json({ success: true, id });
+
+    res.status(201).json({ success: true, id: result.lastID });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 // DELETE report (admin only)
 router.delete('/:id', verifyToken, async (req, res) => {
