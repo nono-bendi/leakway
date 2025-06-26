@@ -25,24 +25,6 @@ router.get('/', verifyToken, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('leakForm');
-  const msg  = document.getElementById('message');
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-
-    // validation HTML5 (required)
-    if (!form.checkValidity()) {
-      msg.textContent = "Merci de remplir tous les champs requis.";
-      return;
-    }
-
-    // on conserve tout le reste de ta logique fetch…
-    const data = Object.fromEntries(new FormData(form).entries());
-    // …
-  });
-});
 
 
 // DELETE report (admin only)
