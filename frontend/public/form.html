@@ -1,60 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Signaler un piratage</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signalement LeakWay</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <h1>Formulaire de signalement</h1>
-  <form id="leakForm">
-    <label>
-      Nom :
-      <input type="text" name="nom" required>
-    </label><br>
+  <div class="container">
+    <h1>Signaler un contenu piraté</h1>
 
-    <label>
-      Compte (pseudo) :
-      <input type="text" name="compte" required>
-    </label><br>
+    <form id="leakForm">
+      <label>Nom :</label>
+      <input type="text" name="nom" required />
 
-    <label>
-      Email :
-      <input type="email" name="email" required>
-    </label><br>
+      <label>Compte (pseudo) :</label>
+      <input type="text" name="compte" required />
 
-    <label>
-      Lien pirate :
-      <input type="url" name="lien_pirate" required>
-    </label><br>
+      <label>Email :</label>
+      <input type="email" name="email" required />
 
-    <label>
-      Lien officiel :
-      <input type="url" name="lien_officiel" required>
-    </label><br>
+      <label>Lien pirate :</label>
+      <input type="url" name="lien_pirate" required />
 
-    <label>
-      Plateforme :
+      <label>Lien officiel :</label>
+      <input type="url" name="lien_officiel" required />
+
+      <label>Plateforme :</label>
       <select name="plateforme" required>
         <option value="" disabled selected>-- Choisissez --</option>
         <option value="facebook">Facebook</option>
         <option value="twitter">Twitter</option>
         <option value="instagram">Instagram</option>
-        <!-- Ajoutez vos plateformes ici -->
+        <!-- ajoute d’autres plateformes si besoin -->
       </select>
-    </label><br>
 
-    <label>
-      Commentaire :
+      <label>Commentaire :</label>
       <textarea name="commentaire"></textarea>
-    </label><br>
 
-    <button type="submit">Envoyer</button>
-  </form>
+      <button type="submit">Envoyer</button>
+    </form>
 
-  <!-- CONTENEUR POUR MESSAGES -->
-  <p id="message" style="color: red;"></p>
+    <!-- CONTENEUR POUR MESSAGES D'ERREUR OU DE SUCCÈS -->
+    <p id="message" style="color: red;"></p>
+  </div>
 
-  <!-- ON CHARGE LE SCRIPT AVEC defer POUR QUE LE DOM SOIT PRÊT -->
+  <!-- ON CHARGE UN SEUL SCRIPT EXTERNE -->
   <script src="script.js" defer></script>
 </body>
 </html>

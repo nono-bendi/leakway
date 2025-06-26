@@ -5,31 +5,42 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Vérification des champs HTML5 (required)
+    // HTML5 validation (required)
     if (!form.checkValidity()) {
       msg.textContent = "Merci de remplir tous les champs requis.";
       return;
     }
 
-    // Récupère les champs du formulaire
     const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      const response = await fetch('https://leakway-production.up.railway.app/api/reports', {
+      const resp = await fetch('https://leakway-production.up.railway.app/api/reports', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
-        // Redirection vers une page de confirmation
+      if (resp.ok) {
+        // en cas de succès, redirection
         window.location.href = 'confirmation.html';
       } else {
-        const error = await response.json();
-        msg.textContent = error.error || "Erreur lors de l'envoi.";
+        const err = await resp.json();
+        msg.textContent = err.error || "Échec de l'envoi, veuillez vérifier vos champs.";
       }
-    } catch (err) {
+    } catch (error) {
       msg.textContent = "Erreur réseau, réessayez plus tard.";
     }
   });
+
+  // Si tu veux garder ton animation Lottie :
+  const lottieContainer = document.getElementById('lottie-shield');
+  if (lottieContainer && window.lottie) {
+    lottie.loadAnimation({
+      container: lottieContainer,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'shield-animation.json'
+    });
+  }
 });
