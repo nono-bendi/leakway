@@ -13,30 +13,25 @@
 <!-- ✅ CHAMPS CORRECTEMENT ALIGNÉS AVEC db.js -->
 <form id="leakForm">
   <label>Name:</label>
-  <input type="text" name="nom" required />
+  <input name="nom" required />
 
   <label>Account name:</label>
-  <input type="text" name="compte" required />
+  <input name="nomCompte" required />
 
   <label>Email:</label>
   <input type="email" name="email" required />
 
   <label>Leaked content URL:</label>
-  <input type="url" name="lien_pirate" required />
+  <input type="url" name="lienPirate" required />
 
   <label>Official content URL:</label>
-  <input type="url" name="lien_officiel" required />
+  <input type="url" name="lienOfficiel" required />
 
   <label>Platform:</label>
-  <select name="plateforme" required>
-    <option value="">-- Select --</option>
-    <option value="Coomer">Coomer</option>
-    <option value="Kemono">Kemono</option>
-    <option value="Other">Other</option>
-  </select>
+  <select name="plateforme" required> … </select>
 
   <label>Comment (optional):</label>
-  <textarea name="commentaire" rows="4"></textarea>
+  <textarea name="commentaire"></textarea>
 
   <button type="submit">Submit</button>
 </form>
