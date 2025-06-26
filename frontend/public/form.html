@@ -1,74 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Report Leaked Content</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Report leaked content anonymously with LeakWay." />
+  <meta charset="UTF-8">
+  <title>Signaler un piratage</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Report Leaked Content</h1>
-<!-- ✅ CHAMPS CORRECTEMENT ALIGNÉS AVEC db.js -->
-<form id="leakForm">
-  <label>Name:</label>
-  <input type="text" name="nom" required />
+  <h1>Formulaire de signalement</h1>
+  <form id="leakForm">
+    <label>
+      Nom :
+      <input type="text" name="nom" required>
+    </label><br>
 
-  <label>Account name:</label>
-  <input type="text" name="compte" required />
+    <label>
+      Compte (pseudo) :
+      <input type="text" name="compte" required>
+    </label><br>
 
-  <label>Email:</label>
-  <input type="email" name="email" required />
+    <label>
+      Email :
+      <input type="email" name="email" required>
+    </label><br>
 
-  <label>Leaked content URL:</label>
-  <input type="url" name="lien_pirate" required />
+    <label>
+      Lien pirate :
+      <input type="url" name="lien_pirate" required>
+    </label><br>
 
-  <label>Official content URL:</label>
-  <input type="url" name="lien_officiel" required />
+    <label>
+      Lien officiel :
+      <input type="url" name="lien_officiel" required>
+    </label><br>
 
-  <label>Platform:</label>
-  <select name="plateforme" required>
-    <option value="">-- Select --</option>
-    <option value="Coomer">Coomer</option>
-    <option value="Kemono">Kemono</option>
-    <option value="Other">Other</option>
-  </select>
+    <label>
+      Plateforme :
+      <select name="plateforme" required>
+        <option value="" disabled selected>-- Choisissez --</option>
+        <option value="facebook">Facebook</option>
+        <option value="twitter">Twitter</option>
+        <option value="instagram">Instagram</option>
+        <!-- Ajoutez vos plateformes ici -->
+      </select>
+    </label><br>
 
-  <label>Comment (optional):</label>
-  <textarea name="commentaire" rows="4"></textarea>
+    <label>
+      Commentaire :
+      <textarea name="commentaire"></textarea>
+    </label><br>
 
-  <button type="submit">Submit</button>
-</form>
+    <button type="submit">Envoyer</button>
+  </form>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById('leakForm');
+  <!-- CONTENEUR POUR MESSAGES -->
+  <p id="message" style="color: red;"></p>
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      try {
-        const response = await fetch('https://leakway-production.up.railway.app/api/reports', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-
-        if (response.ok) {
-          window.location.href = 'confirmation.html';
-        } else {
-          document.getElementById('message').textContent = "Submission failed. Check your inputs.";
-        }
-      } catch (error) {
-        document.getElementById('message').textContent = "Network error.";
-      }
-    });
-  });
-</script>
-
+  <!-- ON CHARGE LE SCRIPT AVEC defer POUR QUE LE DOM SOIT PRÊT -->
+  <script src="script.js" defer></script>
 </body>
 </html>

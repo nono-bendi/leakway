@@ -1,40 +1,35 @@
-const form = document.getElementById('leakForm');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('leakForm');
+  const msg  = document.getElementById('message');
 
-form.addEventListener('submit', async function (e) {
-  e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-
-  try {
-    const response = await fetch('https://leakway-production.up.railway.app/api/reports', {
-
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      window.location.href = 'confirmation.html';
-    } else {
-      document.getElementById('message').textContent = "Erreur lors de l'envoi.";
+    // Vérification des champs HTML5 (required)
+    if (!form.checkValidity()) {
+      msg.textContent = "Merci de remplir tous les champs requis.";
+      return;
     }
-  } catch (error) {
-    document.getElementById('message').textContent = "Erreur de connexion.";
-  }
-});
 
+    // Récupère les champs du formulaire
+    const data = Object.fromEntries(new FormData(form).entries());
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Lottie animation
-  const lottieContainer = document.getElementById('lottie-shield');
-  if (lottieContainer) {
-    lottie.loadAnimation({
-      container: lottieContainer,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'shield-animation.json'
-    });
-  }
+    try {
+      const response = await fetch('https://leakway-production.up.railway.app/api/reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // Redirection vers une page de confirmation
+        window.location.href = 'confirmation.html';
+      } else {
+        const error = await response.json();
+        msg.textContent = error.error || "Erreur lors de l'envoi.";
+      }
+    } catch (err) {
+      msg.textContent = "Erreur réseau, réessayez plus tard.";
+    }
+  });
 });

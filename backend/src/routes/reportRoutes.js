@@ -25,32 +25,25 @@ router.get('/', verifyToken, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('leakForm');
+  const msg  = document.getElementById('message');
 
-// POST report (public)
-router.post('/', async (req, res) => {
-  const { nom, compte, email, lien_pirate, lien_officiel, plateforme, commentaire } = req.body;
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
 
-  // Vérification
-  if (!nom || !compte || !email || !lien_pirate || !lien_officiel || !plateforme) {
-    return res.status(400).json({ error: 'Champs obligatoires manquants' });
-  }
+    // validation HTML5 (required)
+    if (!form.checkValidity()) {
+      msg.textContent = "Merci de remplir tous les champs requis.";
+      return;
+    }
 
-  try {
-    const result = await db.enregistrerSignalement({
-      nom,
-      compte,
-      email,
-      lien_pirate,
-      lien_officiel,
-      plateforme,
-      commentaire,
-    });
-
-    res.status(201).json({ success: true, id: result.lastID });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    // on conserve tout le reste de ta logique fetch…
+    const data = Object.fromEntries(new FormData(form).entries());
+    // …
+  });
 });
+
 
 // DELETE report (admin only)
 router.delete('/:id', verifyToken, async (req, res) => {
