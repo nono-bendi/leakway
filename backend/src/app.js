@@ -3,31 +3,31 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const reportRoutes = require('./routes/reportRoutes'); // Routes pour les signalements
+const reportRoutes = require('./routes/reportRoutes');
 const db = require('./db');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware CORS – TEMPORAIREMENT ouvert à tous (à restreindre ensuite !)
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // Sert les fichiers statiques du frontend
 app.use(express.static(path.join(__dirname, '../../frontend/public')));
 
-// Middleware CORS pour autoriser les requêtes cross-origin
-origin: '*', // temporairement pour tous les domaines
-
-
-// Middleware pour parser le JSON et les formulaires
+// Middleware pour parser les données
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Utilise les routes de report
+// Routes API
 app.use('/api/reports', reportRoutes);
 
-// Lancement du serveur
+// Démarrage du serveur
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
-
