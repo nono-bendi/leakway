@@ -45,6 +45,7 @@
   </div>
 
   <script>
+  document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('leakForm');
 
     form.addEventListener('submit', async function (e) {
@@ -55,7 +56,6 @@
 
       try {
         const response = await fetch('https://leakway-production.up.railway.app/api/reports', {
-
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
@@ -70,6 +70,8 @@
         document.getElementById('message').textContent = "Network error.";
       }
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
