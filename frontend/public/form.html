@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LeakWay Report</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Report Pirated Content</h1>
+
+    <form id="leakForm">
+      <label>Name:</label>
+      <input type="text" name="nom" required />
+
+      <label>Account (username):</label>
+      <input type="text" name="compte" required />
+
+      <label>Email:</label>
+      <input type="email" name="email" required />
+
+      <label>Pirated link:</label>
+      <input type="url" name="lien_pirate" required />
+
+      <label>Official link:</label>
+      <input type="url" name="lien_officiel" required />
+
+      <label>Platform:</label>
+      <select name="plateforme" required>
+        <option value="" disabled selected>-- Choose --</option>
+        <option value="coomer">Coomer</option>
+        <option value="kemono">Kemono</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label>Comment:</label>
+      <textarea name="commentaire"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- CONTAINER FOR ERROR OR SUCCESS MESSAGES -->
+    <p id="message" style="color: red;"></p>
+  </div>
+
+  <!-- LOAD ONLY ONE EXTERNAL SCRIPT -->
+  <script src="script.js" defer></script>
+</body>
+</html>
